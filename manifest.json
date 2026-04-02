@@ -3,7 +3,7 @@
   "name": "Dead Internet Bot",
   "version": "0.1.0",
   "description": "A parody browser extension that analyzes Shorts/Reels and generates NPC-style comments.",
-  "permissions": ["activeTab", "tabs"],
+  "permissions": ["activeTab", "tabs","scripting"],
   "host_permissions": [
     "https://www.youtube.com/*"
   ],

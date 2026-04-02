@@ -19,7 +19,7 @@ button.addEventListener("click", async () => {
     return;
   }
 
-  try {
+  function requestShortInfo() {
     chrome.tabs.sendMessage(tab.id, { type: "GET_SHORT_INFO" }, (response) => {
       if (chrome.runtime.lastError) {
         result.textContent =
@@ -37,7 +37,24 @@ button.addEventListener("click", async () => {
         `Title: ${response.title}\n\n` +
         `URL: ${response.url}`;
     });
-  } catch (error) {
-    result.textContent = `Error: ${error.message}`;
   }
+
+  chrome.tabs.sendMessage(tab.id, { type: "PING" }, async (response) => {
+    if (chrome.runtime.lastError || !response?.ok) {
+      try {
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["content.js"]
+        });
+
+        requestShortInfo();
+      } catch (error) {
+        result.textContent = `Failed to load content script: ${error.message}`;
+      }
+
+      return;
+    }
+
+    requestShortInfo();
+  });
 });
