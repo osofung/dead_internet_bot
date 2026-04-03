@@ -1,20 +1,28 @@
 {
-  "manifest_version": 3,
-  "name": "Dead Internet Bot",
-  "version": "0.1.0",
-  "description": "A parody browser extension that analyzes Shorts/Reels and generates NPC-style comments.",
-  "permissions": ["activeTab", "tabs","scripting"],
-  "host_permissions": [
-    "https://www.youtube.com/*"
-  ],
-  "action": {
-    "default_popup": "popup.html"
-  },
-  "content_scripts": [
+    "manifest_version": 3,
+    "name": "Dead Internet Bot",
+    "version": "0.1.0",
+    "description": "A parody browser extension that analyzes Shorts/Reels and generates NPC-style comments.",
+    "permissions": ["activeTab", "tabs", "scripting"],
+    "host_permissions": [
+        "https://www.youtube.com/*"
+    ],
+    "icons": {
+        "128": "icons/icon.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon.png",
+            "32": "icons/icon.png",
+            "48": "icons/icon.png"
+        }
+    },
+    "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/shorts/*"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
+        "matches": ["https://www.youtube.com/shorts/*"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
     }
   ]
 }
